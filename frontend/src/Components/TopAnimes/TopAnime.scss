@@ -1,0 +1,11 @@
+.content {
+    .heading{
+        font-size: 50px;
+        color: #e1e1e1;
+    }
+    .Animes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+}

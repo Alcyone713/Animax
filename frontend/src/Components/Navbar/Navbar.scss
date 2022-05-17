@@ -1,0 +1,45 @@
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .pages{
+        display: flex;
+        align-items: center;
+        img{
+            height: 80px;
+            width: 100px;
+            margin: 10px;
+            box-shadow: 0 0 10px 10px #0a0a0a;
+        }
+        a{
+            color: white;
+            margin-left: 10px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        a:hover{
+            border-bottom: 2px solid #efb71f;
+        }
+    }
+    .searchbar{
+        width: 40%;
+        input{
+            width: 75%;
+            height: 23px;
+            background-color: #2c2525;
+            border: none;
+            color: #e1e1e1;
+            border-radius: 3px;
+            padding: 5px 10px;
+        }
+    }
+    .logout{
+        display: flex;
+        align-items: center;
+        margin-left: 80px;
+        svg{
+            color:rgb(216, 215, 215);
+            margin: 20px;
+        }
+    }
+}

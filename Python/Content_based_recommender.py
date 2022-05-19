@@ -25,7 +25,7 @@ anime_features = pd.concat([anime["genre"].str.get_dummies(
 max_abs_scaler = MaxAbsScaler()
 anime_features = max_abs_scaler.fit_transform(anime_features)
 nbrs = NearestNeighbors(
-    n_neighbors=6, algorithm='ball_tree').fit(anime_features)
+    n_neighbors=8, algorithm='ball_tree').fit(anime_features)
 distances, indices = nbrs.kneighbors(anime_features)
 
 
@@ -37,7 +37,7 @@ def get_index_from_name(title):
 # print(indices[144])
 
 
-queryArr = ["Shingeki no Kyojin", "Kimetsu no Yaiba", "Boku no Hero Academia", "Death Note", "Dragon Ball Super", "Gintama", "Bungou Stray Dogs", "Sen to Chihiro no Kamikakushi", "Fullmetal Alchemist: Brotherhood", "Saint Seiya"]
+queryArr = ["Naruto"]
 
 def get_similar_animes(query):
     recArr=np.array([])

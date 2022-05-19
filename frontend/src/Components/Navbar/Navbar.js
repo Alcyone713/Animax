@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Navbar.scss'
 import logo from '../../Assets/logo.png'
 import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Navbar() {
   
@@ -38,7 +38,7 @@ export default function Navbar() {
         </div>
         <div className='logout'>
           <LogoutIcon style={{fontSize: '30px'}} />
-          <AccountCircleIcon style={{fontSize: '50px'}}/>
+          {/* <AccountCircleIcon style={{fontSize: '50px'}}/> */}
         </div>
       </nav>
     </div>

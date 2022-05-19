@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './TopAnime.scss'
 import AnimeCard from '../AnimeCard/AnimeCard'
-import AnimeInfo from '../../Pages/AnimeInfo/AnimeInfo'
 
 export default function TopAnimes() {
 
@@ -23,7 +22,7 @@ export default function TopAnimes() {
     const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/bypopularity`)
       .then(res => res.json())
 
-    setTopAnime(temp.top)
+    setTopAnime(temp.top.slice(0,30))
     // console.log(temp)
   }
   useEffect(() => {
@@ -37,7 +36,7 @@ export default function TopAnimes() {
         {topAnime.map((item, index) => {
           return (
             <div key={index} className='animecard'>
-              <AnimeCard img={item.image_url} title={item.title} score={item.score} episodes={item.episodes} enddate={item.end_date} />
+              <AnimeCard img={item.image_url} title={item.title} score={item.score} episodes={item.episodes} enddate={item.end_date} mal_id={item.mal_id} />
             </div>
           )
         })}

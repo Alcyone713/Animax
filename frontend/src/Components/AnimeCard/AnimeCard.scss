@@ -4,7 +4,6 @@
     margin-top: 20px;
     color: #e1e1e1;
     font-family: 'Roboto';
-
     .heading{
         margin-top: 10px;
         text-align: center;
@@ -46,3 +45,11 @@
     transform: scale(1.06);
     transition: 0.25s;
 }
+.customOverlay {
+    background: rgba(36, 123, 160, 0.7);
+  }
+.customModal {
+    background: #b2dbbf;
+    max-width: 500px;
+    width: 100%;
+  }

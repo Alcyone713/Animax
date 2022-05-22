@@ -4,22 +4,21 @@ import './AnimeInfo.scss'
 export default function AnimeInfo(props) {
 
   const id = props.id;
-  const [animeinfo, setAnimeInfo] = useState(null)
+  const [animeinfo, setAnimeInfo] = useState([])
 
   const getAnimeInfo = async () => {
     const temp = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
       .then(res => res.json())
-
     setAnimeInfo(temp)
-    console.log(temp)
+    // console.log(temp)
   }
   useEffect(() => {
     getAnimeInfo();
-  }, [])
+  })
 
   return (
     <div>
-      {animeinfo === null ? (<h2 style={{color: '#e1e1e1'}}>Loading ... </h2>) : (
+      {animeinfo.length === 0 ? (<h2 style={{color: '#e1e1e1'}}>Loading ... </h2>) : (
         <div className='AnimeInfo'>
           <div className='AnimeImg'>
             <img src={animeinfo.data.images.jpg.image_url} alt='animeimg' />

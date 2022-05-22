@@ -3,6 +3,7 @@ import './AnimeCard.scss'
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import AnimeInfo from '../AnimeInfo/AnimeInfo';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 export default function AnimeCard(props) {
@@ -12,8 +13,9 @@ export default function AnimeCard(props) {
     const bg = {
         modal: {
           background: "#292929"
-        }
-      };
+        },
+    };
+
 
     return (
         <div className='card'>
@@ -28,7 +30,7 @@ export default function AnimeCard(props) {
                 <h6>Episodes : {props.episodes}</h6>
                 <h6>End-date : {props.enddate}</h6>
                 <h6 onClick={onOpenModal} style={{textDecoration: 'underline', cursor: 'pointer'}}>Read More</h6>
-                <Modal open={open} onClose={onCloseModal} center styles={bg}>
+                <Modal open={open} onClose={onCloseModal} center styles={bg} closeIcon={<CloseIcon style={{color: "white"}}/>}>
                     <AnimeInfo id={props.mal_id} />
                 </Modal>
 

@@ -3,6 +3,7 @@ nav{
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    z-index: 0;
     .pages{
         display: flex;
         align-items: center;
@@ -25,6 +26,9 @@ nav{
     }
     .searchbar{
         width: 35%;
+        display: flex;
+        flex-direction: row;
+        justify-content:center ;
         input{
             width: 75%;
             height: 23px;
@@ -33,6 +37,15 @@ nav{
             color: #e1e1e1;
             border-radius: 3px;
             padding: 5px 10px;
+        }
+        .suggestions{
+            height: 300px;
+            background-color: #e1e1e1;
+            width: 31%;
+            margin-top: 35px;
+            overflow-x: hidden;
+            z-index: 5;
+            position: absolute;
         }
     }
     .logout{

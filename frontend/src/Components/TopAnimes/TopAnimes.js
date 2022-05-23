@@ -5,19 +5,7 @@ import AnimeCard from '../AnimeCard/AnimeCard'
 export default function TopAnimes() {
 
   const [topAnime, setTopAnime] = useState([])
-  // const [page, setPage] = useState("topAnime")
-  // const [mal_id, set_mal_id] = useState("")
-
-  // const getPage = () =>{
-  //   if(page==="animeInfo"){
-  //     return <AnimeInfo id={mal_id}/>
-  //   }
-  //   else{
-  //    return <TopAnimes />
-  //   }
-  // }
    
-
   const getTopAnime = async () => {
     const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/bypopularity`)
       .then(res => res.json())
@@ -32,6 +20,7 @@ export default function TopAnimes() {
   return (
     <div className='content'>
       <div className='heading'>Top Animes</div>
+      
       <div className='Animes'>
         {topAnime.map((item, index) => {
           return (

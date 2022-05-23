@@ -3,6 +3,7 @@ import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import AnimeInfo from '../AnimeInfo/AnimeInfo';
 import CloseIcon from '@mui/icons-material/Close';
+import './SearchSuggestions.scss'
 
 export default function SearchSuggestions(props) {
     const [open, setOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function SearchSuggestions(props) {
     return (
         <div className='search-suggestions'>
             <img src={props.img} alt="something" />
-            <h3 onClick={onOpenModal}>{props.title}</h3>
+            <h5 onClick={onOpenModal}>{props.title}</h5>
             <Modal open={open} onClose={onCloseModal} center styles={bg} closeIcon={<CloseIcon style={{ color: "white" }} />}>
                 <AnimeInfo id={props.id} />
             </Modal>

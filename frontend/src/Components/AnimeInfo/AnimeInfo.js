@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import './AnimeInfo.scss'
+import { makeRequest } from '../../Actions/Actions';
 
 export default function AnimeInfo(props) {
 
   const id = props.id;
   const [animeinfo, setAnimeInfo] = useState([])
 
-  const getAnimeInfo = async () => {
-    const temp = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
-      .then(res => res.json())
-    setAnimeInfo(temp)
-    // console.log(temp)
+  // const getAnimeInfo = async () => {
+  //   const temp = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
+  //     .then(res => res.json())
+  //   setAnimeInfo(temp)
+  //   // console.log(temp)
+  // }
+  const getAnimeInfo = () => {
+    makeRequest('GET', `https://api.jikan.moe/v4/anime/${id}`)
+      .then(info => {
+        setAnimeInfo(JSON.parse(info))
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
   useEffect(() => {
     getAnimeInfo();
-  })
+  },[])
 
   return (
     <div>

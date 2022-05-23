@@ -1,19 +1,17 @@
 nav{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     z-index: 0;
+    overflow-x: hidden;
     .pages{
+        width: 100vw;
         display: flex;
         align-items: center;
+        margin-bottom: 10px;
+        margin-left: 10px;
         justify-content: flex-start;
-        img{
-            height: 70px;
-            width: 170px;
-            margin: 10px;
-            box-shadow: 0 0 10px 10px #0a0a0a;
-        }
         a{
             color: white;
             margin-left: 10px;
@@ -24,37 +22,53 @@ nav{
             border-bottom: 2px solid #efb71f;
         }
     }
-    .searchbar{
-        width: 35%;
+    .part1{
+        width: 100vw;
         display: flex;
         flex-direction: row;
-        justify-content:center ;
-        input{
-            width: 75%;
-            height: 23px;
-            background-color: #2c2525;
-            border: none;
-            color: #e1e1e1;
-            border-radius: 3px;
-            padding: 5px 10px;
+        justify-content: space-between;
+        #logo{
+            height: 50px;
+            width: 140px;
+            margin: 10px;
+            box-shadow: 0 0 10px 10px #0a0a0a;
         }
-        .suggestions{
-            height: 300px;
-            background-color: #e1e1e1;
-            width: 31%;
-            margin-top: 35px;
-            overflow-x: hidden;
-            z-index: 5;
-            position: absolute;
+        .searchbar{
+            width: 60%;
+            display: flex;
+            flex-direction: row;
+            justify-content:center ;
+            align-items: center;
+            input{
+                width: 90%;
+                height: 23px;
+                background-color: #2c2525;
+                border: 0.2px solid #9b9b9b;
+                color: #e1e1e1;
+                border-radius: 3px;
+                padding: 5px 10px;
+            }
+            .suggestions{
+                height: 400px;
+                background-color: #2c2525;
+                width: 55%;
+                margin-top: 436px;
+                overflow-x: hidden;
+                z-index: 5;
+                position: absolute;
+            }
+            button{
+                background-color: #2c2525;
+                border: 0.2px solid #9c9c9c;
+            }
         }
-    }
-    .logout{
-        display: flex;
-        align-items: center;
-        margin-left: 80px;
-        svg{
-            color:rgb(216, 215, 215);
-            margin: 20px;
+        .logout{
+            display: flex;
+            align-items: center;
+            svg{
+                color:rgb(216, 215, 215);
+                margin: 20px;
+            }
         }
     }
 }

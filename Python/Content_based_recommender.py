@@ -15,17 +15,18 @@ anime["score"] = anime["score"].astype(float)
 anime["score"].fillna(anime["score"].median(), inplace=True)
 anime["members"] = anime["members"].astype(float)
 
-anime_features = pd.concat([anime["genre"].str.get_dummies(
-    sep=","), anime[["score"]], anime[["members"]], anime["popularity"]], axis=1)
 # anime["title"] = anime["title"].map(
 #     lambda title: re.sub('[^A-Za-z0-9]+', " ", title))
 # print(anime_features.head())
 # print(anime_features.columns)
+anime_features = pd.concat([anime["genre"].str.get_dummies(
+    sep=","), anime[["score"]], anime[["members"]], anime["popularity"]], axis=1)
+
 
 max_abs_scaler = MaxAbsScaler()
 anime_features = max_abs_scaler.fit_transform(anime_features)
 nbrs = NearestNeighbors(
-    n_neighbors=6, algorithm='ball_tree').fit(anime_features)
+    n_neighbors=8, algorithm='ball_tree').fit(anime_features)
 distances, indices = nbrs.kneighbors(anime_features)
 
 
@@ -37,7 +38,7 @@ def get_index_from_name(title):
 # print(indices[144])
 
 
-queryArr = ["Shingeki no Kyojin", "Kimetsu no Yaiba", "Boku no Hero Academia", "Death Note", "Dragon Ball Super", "Gintama", "Bungou Stray Dogs", "Sen to Chihiro no Kamikakushi", "Fullmetal Alchemist: Brotherhood", "Saint Seiya"]
+queryArr = ["Naruto", "One Piece"]
 
 def get_similar_animes(query):
     recArr=np.array([])

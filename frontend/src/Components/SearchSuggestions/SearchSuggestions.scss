@@ -1,0 +1,12 @@
+.search-suggestions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    color: #efeeee;
+    img{
+        height: 70px;
+        width: 60px;
+        margin: 5px;
+    }
+}

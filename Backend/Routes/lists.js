@@ -1,66 +1,67 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const User = mongoose.model("User")
 const requireLogin = require('../requireLoginMiddleware.js')
-const Watch_List =  mongoose.model("Watch_List")
-const Completed_List =  mongoose.model("Completed_List")
 
-router.post('/add_to_completedlist',requireLogin,(req,res)=>{
-    const {mal_id, score} = req.body 
-    if(!mal_id|| !score){
-      return  res.status(422).json({error:"Plase add all the fields"})
+
+router.put('/add_to_completedlist', async (req, res) => {
+    let { uid, score, email } = req.query
+    uid=parseInt(uid,10)
+    score=parseInt(score,10)
+    if (!uid || !score) {
+        res.status(422).json({ error: "Please add something to completed list" })
     }
-    req.user.password = undefined
-    const completed_list = new Completed_List({
-        mal_id,
-        score,
-        added_by:req.user
-    })
-    completed_list.save().then(result=>{
-        res.json({completed_list:result})
-    })
-    .catch(err=>{
-        console.log(err)
+
+    res.json({ message: "successfully send" })
+    await User.findOneAndUpdate({ email: email }, {
+        $push: {
+            completedlist:
+            {
+                mal_id: uid,
+                score: score
+            }
+        },
+    }, function (error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(success);
+        }
     })
 })
 
-router.post('/add_to_watchlist',requireLogin,(req,res)=>{
-    const {mal_id} = req.body 
-    if(!mal_id){
-      return  res.status(422).json({error:"Plase add all the fields"})
+router.get('/userdetails', async (req, res) => {
+    const { email } = req.query
+    console.log(email)
+    await User.find({email: email})
+        .then(data => {
+            console.log(data)
+            res.json(data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+
+
+router.put('/add_to_watchlist/:uid', (req, res) => {
+    const email = req.body.email
+    const uid = parseInt(req.params.uid,10)
+
+    console.log(uid)
+    if (!uid) {
+        return res.status(422).json({ error: "Please add something to watchlist" })
     }
-    req.user.password = undefined
-    const watch_list = new Watch_List({
-        mal_id,
-        added_by:req.user
-    })
-    watch_list.save().then(result=>{
-        res.json({completed_list:result})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-})
-
-router.get('/mywatchlist',requireLogin,(req,res)=>{
-    Watch_List.find({added_by:req.user._id})
-    .populate("added_by","_id name")
-    .then(mypost=>{
-        res.json({mypost})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-})
-
-router.get('/mycompletedlist',requireLogin,(req,res)=>{
-    Completed_List.find({added_by:req.user._id})
-    .populate("added_by","_id name")
-    .then(mypost=>{
-        res.json({mypost})
-    })
-    .catch(err=>{
-        console.log(err)
+    res.json({ message: "successfully send" })
+    User.findOneAndUpdate({ email: email }, {
+        $push: { watchlist: uid },
+    }, function (error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(success);
+        }
     })
 })
 

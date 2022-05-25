@@ -5,19 +5,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 import { makeRequest } from '../../Actions/Actions';
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { NavLink } from 'react-router-dom';
+
 
 export default function Navbar() {
 
   const [search, setSearch] = useState("")
   const [searchResults, setSearchResults] = useState([])
-
-  // const getSearchResults = async () => {
-  //   const temp = await fetch("https://api.jikan.moe/v4/anime?q=" + search + "&limit=10")
-  //     .then(res => res.json())
-  //   setSearchResults(temp.data)
-  //   console.log(temp.data)
-  // }
 
   const getSearchResults = () => {
     makeRequest('GET', "https://api.jikan.moe/v4/anime?q=" + search + "&limit=10")
@@ -38,7 +32,6 @@ export default function Navbar() {
     setSearch(e.target.value)
   }
 
-
   return (
     <div>
       <nav>
@@ -58,20 +51,19 @@ export default function Navbar() {
               </div>
               )
             }
-            {/* <button>
+            <button>
               <SearchIcon style={{ color: "#e1e1e1" }} />
-            </button> */}
+            </button>
           </div>
           <div className='logout'>
             <LogoutIcon style={{ fontSize: '30px' }} />
-            {/* <AccountCircleIcon style={{fontSize: '50px'}}/> */}
           </div>
         </div>
         <div className='pages'>
-          <a href='#'>Home</a>
-          <a href='#'>For You</a>
-          <a href='#'>Watchlist</a>
-          <a href='#'>Completed</a>
+          <NavLink activeClassName="active" to='/'>Home</NavLink>
+          <NavLink activeClassName="active" to='/recommendations'>For You</NavLink>
+          <NavLink activeClassName="active" to='/watchlist'>Watchlist</NavLink>
+          <NavLink activeClassName="active" to='/completed'>Completed</NavLink>
         </div>
       </nav>
     </div>

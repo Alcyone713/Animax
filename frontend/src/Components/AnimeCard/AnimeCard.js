@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './AnimeCard.scss'
+import axios from 'axios'
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import AnimeInfo from '../AnimeInfo/AnimeInfo';
@@ -16,6 +17,17 @@ export default function AnimeCard(props) {
         },
     };
 
+
+    useEffect(() => {
+      axios.get("http://localhost:5000/userdetails?email=gojosatoru@jujutsu.com")
+      .then((res)=>{
+        console.log(res)
+      })
+      .catch((err)=>{
+          console.log(err)
+      })
+    }, [])
+    
 
     return (
         <div className='card'>

@@ -12,6 +12,7 @@ export default function Navbar() {
 
   const [search, setSearch] = useState("")
   const [searchResults, setSearchResults] = useState([])
+  const [name, setName] = useState("")
 
   const getSearchResults = () => {
     makeRequest('GET', "https://api.jikan.moe/v4/anime?q=" + search + "&limit=10")
@@ -31,6 +32,17 @@ export default function Navbar() {
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
+  useEffect(()=>{
+    fetch('http://localhost:5000/userdetails',{
+        headers:{
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+        }
+    }).then(res=>res.json())
+    .then(result=>{
+        console.log(result)
+        setName(result[0].name)
+    })
+ },[])
 
   return (
     <div>
@@ -56,6 +68,7 @@ export default function Navbar() {
             </button>
           </div>
           <div className='logout'>
+            <h3>{name}</h3>
             <LogoutIcon style={{ fontSize: '30px' }} />
           </div>
         </div>

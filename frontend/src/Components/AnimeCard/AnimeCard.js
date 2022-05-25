@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import './AnimeCard.scss'
-import axios from 'axios'
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import AnimeInfo from '../AnimeInfo/AnimeInfo';
@@ -18,16 +17,15 @@ export default function AnimeCard(props) {
     };
 
 
-    useEffect(() => {
-      axios.get("http://localhost:5000/userdetails?email=gojosatoru@jujutsu.com")
-      .then((res)=>{
-        console.log(res)
-      })
-      .catch((err)=>{
-          console.log(err)
-      })
-    }, [])
+    // const userdetails = async () => {
+    //     const temp = await fetch(`http://localhost:5000/userdetails`)
+    //       .then(res => res.json())
     
+    //      console.log(temp)
+    //   }
+    //   useEffect(() => {
+    //     userdetails()
+    //   }, [])
 
     return (
         <div className='card'>

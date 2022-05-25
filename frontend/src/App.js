@@ -9,8 +9,11 @@ import HomePage from './Pages/HomePage/HomePage';
 import WatchListPage from './Pages/WatchListPage/WatchListPage';
 import CompletedListPage from './Pages/CompletedListPage/CompletedListPage';
 import ForYouPage from './Pages/ForYouPage/ForYouPage';
+import SignInPage from './Pages/SignInPage/SignInPage';
+import SignUpPage from './Pages/SignUpPage/SignUpPage';
 
 function App() {
+  
   return (
     <div className="App">
       <Router>
@@ -19,6 +22,8 @@ function App() {
           <Route exact path="/watchlist" element={<WatchListPage />} />
           <Route exact path="/completed" element={<CompletedListPage />} />
           <Route exact path="/recommendations" element={<ForYouPage />} />
+          <Route exact path="/signin" element={<SignInPage />} />
+          <Route exact path="/signup" element={<SignUpPage />} />
         </Routes>
       </Router >
     </div >

@@ -1,0 +1,29 @@
+.signinpage {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../Assets/Anime1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .blur {
+        background: rgba(156, 155, 155, 0.062); // Make sure this color has an opacity of less than 1
+        backdrop-filter: blur(8px); // This be the blur
+        height: 100vh;
+        width: 100vw;
+        z-index: 0;
+    }
+
+    form {
+        z-index: 1;
+        position: absolute;
+        width: 300px;
+        height: 400px;
+        margin-right: 50px;
+        background-color: white;
+    }
+}

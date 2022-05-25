@@ -5,7 +5,7 @@ const User = mongoose.model("User")
 const requireLogin = require('../requireLoginMiddleware.js')
 
 
-router.put('/add_to_completedlist', async (req, res) => {
+router.put('/add_to_completedlist',requireLogin, async (req, res) => {
     let { uid, score, email } = req.query
     uid=parseInt(uid,10)
     score=parseInt(score,10)
@@ -31,10 +31,8 @@ router.put('/add_to_completedlist', async (req, res) => {
     })
 })
 
-router.get('/userdetails', async (req, res) => {
-    const { email } = req.query
-    console.log(email)
-    await User.find({email: email})
+router.get('/userdetails',requireLogin, async (req, res) => {
+    await User.find({email: req.user.email})
         .then(data => {
             console.log(data)
             res.json(data)
@@ -43,6 +41,7 @@ router.get('/userdetails', async (req, res) => {
             console.log(err)
         })
 })
+
 
 
 router.put('/add_to_watchlist/:uid', (req, res) => {

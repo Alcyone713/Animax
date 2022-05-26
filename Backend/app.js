@@ -1,11 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const { MONGOURI } = require("./keys.js")
+const cors= require("cors")
 require("./Models/User.js")
-require("./Models/Completed_List.js")
-require("./Models/Watch_List.js")
+
 
 const app = express();
+app.use(cors())
 const PORT = 5000;
 mongoose.model("User")
 

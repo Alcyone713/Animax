@@ -5,19 +5,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 import { makeRequest } from '../../Actions/Actions';
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Navbar() {
 
   const [search, setSearch] = useState("")
   const [searchResults, setSearchResults] = useState([])
+  const [name, setName] = useState("")
 
-  // const getSearchResults = async () => {
-  //   const temp = await fetch("https://api.jikan.moe/v4/anime?q=" + search + "&limit=10")
-  //     .then(res => res.json())
-  //   setSearchResults(temp.data)
-  //   console.log(temp.data)
-  // }
+  const history = useNavigate()
 
   const getSearchResults = () => {
     makeRequest('GET', "https://api.jikan.moe/v4/anime?q=" + search + "&limit=10")
@@ -37,7 +35,23 @@ export default function Navbar() {
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
+  useEffect(() => {
+    fetch('http://localhost:5000/userdetails', {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("jwt")
+      }
+    }).then(res => res.json())
+      .then(result => {
+        console.log(result)
+        setName(result[0].name)
+      })
+  }, [])
 
+  const logout = () => {
+    localStorage.removeItem("jwt")
+    history('/')
+    window.location.reload(false)
+  }
 
   return (
     <div>
@@ -58,20 +72,25 @@ export default function Navbar() {
               </div>
               )
             }
-            {/* <button>
+            <button>
               <SearchIcon style={{ color: "#e1e1e1" }} />
-            </button> */}
+            </button>
           </div>
           <div className='logout'>
-            <LogoutIcon style={{ fontSize: '30px' }} />
-            {/* <AccountCircleIcon style={{fontSize: '50px'}}/> */}
+            {name === "" ? (null) : (
+              <div style={{display: "flex", flexDirection: "row"}}>
+                <h2>Hi! {name}</h2>
+                <LogoutIcon style={{ fontSize: '30px', cursor: "pointer" }} onClick={() => logout()} />
+              </div>
+            )}
+
           </div>
         </div>
         <div className='pages'>
-          <a href='#'>Home</a>
-          <a href='#'>For You</a>
-          <a href='#'>Watchlist</a>
-          <a href='#'>Completed</a>
+          <NavLink activeClassName="active" to='/'>Home</NavLink>
+          <NavLink activeClassName="active" to='/recommendations'>For You</NavLink>
+          <NavLink activeClassName="active" to='/watchlist'>Watchlist</NavLink>
+          <NavLink activeClassName="active" to='/completed'>Completed</NavLink>
         </div>
       </nav>
     </div>

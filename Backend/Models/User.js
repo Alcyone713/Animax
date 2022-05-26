@@ -12,7 +12,22 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    watchlist: [{
+        mal_id: {
+            type: Number
+        }
+    }],
+    completedlist: [
+        {
+            mal_id: {
+                type: Number
+            },
+            score: {
+                type: Number
+            }
+        }
+    ]
 })
 
 mongoose.model("User", userSchema);

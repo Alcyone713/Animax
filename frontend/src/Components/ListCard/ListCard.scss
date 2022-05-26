@@ -1,0 +1,32 @@
+.card{
+    background-color: #272727;
+    border-radius: 15px;
+    margin-top: 20px;
+    color: #e1e1e1;
+    .heading{
+        margin-top: 10px;
+        text-align: center;
+        color: #eeeeee;
+        h5{
+            margin: 0px;
+            font-size: 20px;
+            padding: 7px;
+        }
+    }
+    .AnimeImg{
+        img{
+            width: 270px;
+            height: 270px;
+            border-radius: 10px;
+        }
+    }
+    .animeInfo{
+        font-size: 20px;
+        h6{
+        }
+    }
+}
+.card:hover{
+    transform: scale(1.06);
+    transition: 0.25s;
+}

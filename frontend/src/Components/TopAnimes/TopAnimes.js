@@ -13,6 +13,7 @@ export default function TopAnimes() {
     setTopAnime(temp.top.slice(0,30))
     // console.log(temp)
   }
+
   useEffect(() => {
     getTopAnime()
   }, [])

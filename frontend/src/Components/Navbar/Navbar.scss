@@ -21,6 +21,9 @@ nav{
         a:hover{
             border-bottom: 2px solid #efb71f;
         }
+        .active{
+            border-bottom: 2px solid #efb71f;
+        }
     }
     .part1{
         width: 100vw;
@@ -51,7 +54,7 @@ nav{
             .suggestions{
                 height: 400px;
                 background-color: #2c2525;
-                width: 55%;
+                width: 59%;
                 margin-top: 436px;
                 overflow-x: hidden;
                 z-index: 5;
@@ -60,6 +63,7 @@ nav{
             button{
                 background-color: #2c2525;
                 border: 0.2px solid #9c9c9c;
+                padding: 2.5px;
             }
         }
         .logout{
@@ -68,6 +72,9 @@ nav{
             svg{
                 color:rgb(216, 215, 215);
                 margin: 20px;
+            }
+            h2{
+                color: #e1e1e1; 
             }
         }
     }

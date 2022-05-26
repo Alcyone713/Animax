@@ -1,68 +1,77 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const User = mongoose.model("User")
 const requireLogin = require('../requireLoginMiddleware.js')
-const Watch_List =  mongoose.model("Watch_List")
-const Completed_List =  mongoose.model("Completed_List")
+let {PythonShell} = require('python-shell')
 
-router.post('/add_to_completedlist',requireLogin,(req,res)=>{
-    const {mal_id, score} = req.body 
-    if(!mal_id|| !score){
-      return  res.status(422).json({error:"Plase add all the fields"})
-    }
-    req.user.password = undefined
-    const completed_list = new Completed_List({
-        mal_id,
-        score,
-        added_by:req.user
+
+router.put('/add_to_completedlist', requireLogin, async (req, res) => {
+    await User.findOneAndUpdate({ email: req.user.email }, {
+        $push: {
+            completedlist:
+            {
+                mal_id: req.body.mal_id,
+                score: req.body.score
+            }
+        },
     })
-    completed_list.save().then(result=>{
-        res.json({completed_list:result})
-    })
-    .catch(err=>{
-        console.log(err)
+    .then( function (error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            res.json({ message: "successfully send" })
+            console.log(success);
+        }
     })
 })
 
-router.post('/add_to_watchlist',requireLogin,(req,res)=>{
-    const {mal_id} = req.body 
-    if(!mal_id){
-      return  res.status(422).json({error:"Plase add all the fields"})
-    }
-    req.user.password = undefined
-    const watch_list = new Watch_List({
-        mal_id,
-        added_by:req.user
+router.get('/userdetails',requireLogin, async (req, res) => {
+    await User.find({email: req.user.email})
+        .then(data => {
+            console.log(data)
+            res.json(data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+
+router.put('/add_to_watchlist', requireLogin, async (req, res) => {
+    await User.findOneAndUpdate({ email: req.user.email }, {
+        $push: {
+            watchlist:
+            {
+                mal_id: req.body.mal_id
+            }
+        },
     })
-    watch_list.save().then(result=>{
-        res.json({completed_list:result})
-    })
-    .catch(err=>{
-        console.log(err)
+    .then( function (error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            res.json({ message: "successfully send" })
+            console.log(success);
+        }
     })
 })
 
-router.get('/mywatchlist',requireLogin,(req,res)=>{
-    Watch_List.find({added_by:req.user._id})
-    .populate("added_by","_id name")
-    .then(mypost=>{
-        res.json({mypost})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+router.get('/recommendations', requireLogin, async (req, res) => {
+    const CompletedList = await User.find({email : req.user.email })
+    let completedArray = [[]];
+    let i=0;
+    CompletedList[0].completedlist.forEach(e => {
+        let mal = e.mal_id;
+        let sc = e.score;
+        let temp = [
+            mal, sc
+        ]
+        completedArray[i] = temp;
+        i++;
+    });
+    res.send(completedArray)
 })
 
-router.get('/mycompletedlist',requireLogin,(req,res)=>{
-    Completed_List.find({added_by:req.user._id})
-    .populate("added_by","_id name")
-    .then(mypost=>{
-        res.json({mypost})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-})
 
 module.exports = router
 

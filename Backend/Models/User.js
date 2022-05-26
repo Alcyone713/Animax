@@ -14,7 +14,9 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     watchlist: [{
-        type: Number
+        mal_id: {
+            type: Number
+        }
     }],
     completedlist: [
         {

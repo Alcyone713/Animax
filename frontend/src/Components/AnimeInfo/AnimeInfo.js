@@ -1,18 +1,57 @@
 import React, { useEffect, useState } from 'react'
 import './AnimeInfo.scss'
+import { Modal } from 'react-responsive-modal';
 import { makeRequest } from '../../Actions/Actions';
+import { useSnackbar } from 'material-ui-snackbar-provider'
 
 export default function AnimeInfo(props) {
 
   const id = props.id;
   const [animeinfo, setAnimeInfo] = useState([])
+  const [score, setScore] = useState("")
 
-  // const getAnimeInfo = async () => {
-  //   const temp = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
-  //     .then(res => res.json())
-  //   setAnimeInfo(temp)
-  //   // console.log(temp)
-  // }
+  const [open, setOpen] = useState(false);
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+
+  const snackbar = useSnackbar()
+
+  const add_to_watchlist = () => {
+    fetch('http://localhost:5000/add_to_watchlist', {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        mal_id: id
+      })
+    }).then(res => res.json())
+      .then(result => {
+        console.log(result)
+      }).catch(err => {
+        console.log(err)
+      })
+    snackbar.showMessage('Added to watchlist!')
+  }
+  const add_to_completedlist = () => {
+    fetch('http://localhost:5000/add_to_completedlist', {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        mal_id: id,
+        score: score
+      })
+    }).then(res => res.json())
+      .then(result => {
+        console.log(result)
+      }).catch(err => {
+        console.log(err)
+      })
+  }
   const getAnimeInfo = () => {
     makeRequest('GET', `https://api.jikan.moe/v4/anime/${id}`)
       .then(info => {
@@ -24,16 +63,20 @@ export default function AnimeInfo(props) {
   }
   useEffect(() => {
     getAnimeInfo();
-  },[])
+  }, [])
 
   return (
     <div>
-      {animeinfo.length === 0 ? (<h2 style={{color: '#e1e1e1'}}>Loading ... </h2>) : (
+      {animeinfo.length === 0 ? (<h2 style={{ color: '#e1e1e1' }}>Loading ... </h2>) : (
         <div className='AnimeInfo'>
           <div className='AnimeImg'>
             <img src={animeinfo.data.images.jpg.image_url} alt='animeimg' />
-            <button>+ Watchlist</button>
-            <button>+ Completed</button>
+            <button onClick={() => add_to_watchlist()}>+ Watchlist</button>
+            <button onClick={onOpenModal}>+ Completed</button>
+            <Modal open={open} onClose={onCloseModal} center>
+              <input type="text" value={score} onChange={(e) => setScore(e.target.value)}></input>
+              <button onClick={() => { add_to_completedlist(); onCloseModal() }}>+ completed list </button>
+            </Modal>
           </div>
           <div className='animeData'>
             <h3 style={{ textAlign: "center", fontSize: '25px' }}>{animeinfo.data.title}</h3>
@@ -62,7 +105,7 @@ export default function AnimeInfo(props) {
             </div>
             <h4 style={{ marginTop: '3px', marginBottom: '3px' }}>Synopsis : </h4>
             <p>{animeinfo.data.synopsis}</p>
-            <a href={animeinfo.data.url} target="_blank" rel="noreferrer" style={{color: '#e1e1e1'}}>See more info here</a>
+            <a href={animeinfo.data.url} target="_blank" rel="noreferrer" style={{ color: '#e1e1e1' }}>See more info here</a>
           </div>
         </div>
       )}

@@ -4,4 +4,9 @@
     background-color: #212121;
     color: gray;
     overflow-x: hidden;
+    .animecard{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
 }

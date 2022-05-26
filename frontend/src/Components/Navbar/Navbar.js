@@ -68,7 +68,7 @@ export default function Navbar() {
             </button>
           </div>
           <div className='logout'>
-            <h3>{name}</h3>
+            <h2>Hi! {name}</h2>
             <LogoutIcon style={{ fontSize: '30px' }} />
           </div>
         </div>

@@ -5,27 +5,21 @@ const User = mongoose.model("User")
 const requireLogin = require('../requireLoginMiddleware.js')
 
 
-router.put('/add_to_completedlist',requireLogin, async (req, res) => {
-    let { uid, score, email } = req.query
-    uid=parseInt(uid,10)
-    score=parseInt(score,10)
-    if (!uid || !score) {
-        res.status(422).json({ error: "Please add something to completed list" })
-    }
-
-    res.json({ message: "successfully send" })
-    await User.findOneAndUpdate({ email: email }, {
+router.put('/add_to_completedlist', requireLogin, async (req, res) => {
+    await User.findOneAndUpdate({ email: req.user.email }, {
         $push: {
             completedlist:
             {
-                mal_id: uid,
-                score: score
+                mal_id: req.body.mal_id,
+                score: req.body.score
             }
         },
-    }, function (error, success) {
+    })
+    .then( function (error, success) {
         if (error) {
             console.log(error);
         } else {
+            res.json({ message: "successfully send" })
             console.log(success);
         }
     })
@@ -42,26 +36,27 @@ router.get('/userdetails',requireLogin, async (req, res) => {
         })
 })
 
-
-
-router.put('/add_to_watchlist/:uid', (req, res) => {
-    const email = req.body.email
-    const uid = parseInt(req.params.uid,10)
-
-    console.log(uid)
-    if (!uid) {
-        return res.status(422).json({ error: "Please add something to watchlist" })
-    }
-    res.json({ message: "successfully send" })
-    User.findOneAndUpdate({ email: email }, {
-        $push: { watchlist: uid },
-    }, function (error, success) {
+router.put('/add_to_watchlist', requireLogin, async (req, res) => {
+    await User.findOneAndUpdate({ email: req.user.email }, {
+        $push: {
+            watchlist:
+            {
+                mal_id: req.body.mal_id
+            }
+        },
+    })
+    .then( function (error, success) {
         if (error) {
             console.log(error);
         } else {
+            res.json({ message: "successfully send" })
             console.log(success);
         }
     })
+})
+
+router.get('/recommendations', requireLogin, async (req, res) => {
+    
 })
 
 module.exports = router

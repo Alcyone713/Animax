@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './SignInPage.scss'
 import {Link, useNavigate}  from "react-router-dom";
+import logo from '../../Assets/logo.png' 
 
 export default function SignInPage() {
 
@@ -36,11 +37,13 @@ export default function SignInPage() {
     <div className='signinpage'>
         <div className='blur'></div>
         <form>
+            <img src={logo}></img>
             <h4>Username : </h4>
             <input type='text' placeholder='Enter your username' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
             <h4>Password : </h4>
             <input type='text' placeholder='Enter your password' value={password} onChange={(e)=>setPasword(e.target.value)}></input>
             <button onClick={PostData} type="button">Sign In</button>
+            <Link to='/signup'>Not a member? Sign up now</Link>
         </form>
     </div>
   )

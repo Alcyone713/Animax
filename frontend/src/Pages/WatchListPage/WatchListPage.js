@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import ListCard from '../../Components/ListCard/ListCard'
 import Navbar from '../../Components/Navbar/Navbar'
 import './WatchListPage.scss'
+import { useNavigate } from 'react-router-dom'
 
 export default function WatchListPage() {
 
   const [watchlist, setWatchlist] = useState([])
 
+  const navigate = useNavigate()
   useEffect(() => {
     fetch('http://localhost:5000/userdetails', {
       headers: {
@@ -15,7 +17,12 @@ export default function WatchListPage() {
     }).then(res => res.json())
       .then(result => {
         console.log(result)
-        setWatchlist(result[0].watchlist)
+        if(result.error){
+          navigate("/signin")
+        }
+        else{
+          setWatchlist(result[0].watchlist)
+        }
       })
   }, [])
 

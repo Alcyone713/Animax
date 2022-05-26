@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react'
 import ListCard from '../../Components/ListCard/ListCard'
 import Navbar from '../../Components/Navbar/Navbar'
 import './CompletedList.scss'
+import { useNavigate } from 'react-router-dom'
 
 export default function CompletedListPage() {
   const [completedlist, setCompletedlist] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch('http://localhost:5000/userdetails', {
@@ -14,7 +16,12 @@ export default function CompletedListPage() {
     }).then(res => res.json())
       .then(result => {
         console.log(result)
-        setCompletedlist(result[0].completedlist)
+        if(result.error){
+          navigate("/signin")
+        }
+        else{
+          setCompletedlist(result[0].completedlist)
+        }
       })
   }, [])
 

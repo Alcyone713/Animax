@@ -39,16 +39,16 @@
             color: #2c2525;
         }
     }
+    .scoremodal{
+        width: "200px";
+        height: "150px";
+        display:"flex";
+        flex-direction: "column";
+        align-items: "center";
+        justify-content: center;
+    }
 }
 .card:hover{
     transform: scale(1.06);
     transition: 0.25s;
 }
-.customOverlay {
-    background: rgba(36, 123, 160, 0.7);
-  }
-.customModal {
-    background: #b2dbbf;
-    max-width: 500px;
-    width: 100%;
-  }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './SignUpPage.scss'
 import { Link, useNavigate } from "react-router-dom";
+import logo from '../../Assets/logo.png' 
 
 export default function SignUpPage() {
 
@@ -37,13 +38,15 @@ export default function SignUpPage() {
             <div className='signuppage'>
                 <div className='blur'></div>
                 <form>
+                    <img src={logo}></img>
                     <h4>Name : </h4>
                     <input type='text' placeholder='Enter your name' value={name} onChange={(e) => setName(e.target.value)}></input>
                     <h4>Username : </h4>
                     <input type='text' placeholder='Enter your username' value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <h4>Password : </h4>
                     <input type='text' placeholder='Enter your password' value={password} onChange={(e) => setPasword(e.target.value)}></input>
-                    <button onClick={PostData} type="button">Sign In</button>
+                    <button onClick={PostData} type="button">Sign Up</button>
+                    <Link to='/signin'>Already a member? Sign In</Link>
                 </form>
             </div>
         </div>

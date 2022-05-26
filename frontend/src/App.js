@@ -15,7 +15,7 @@ import SignUpPage from './Pages/SignUpPage/SignUpPage';
 function App() {
 
   return (
-    <SnackbarProvider SnackbarProps={{ autoHideDuration: 4000 }}>
+    <SnackbarProvider SnackbarProps={{ autoHideDuration: 3000 }}>
       <div className="App">
         <Router>
           <Routes>

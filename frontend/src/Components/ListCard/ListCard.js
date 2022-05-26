@@ -21,6 +21,7 @@ export default function ListCard(props) {
         getAnimeInfo();
     }, [])
 
+
     return (
         <div>
             {animeinfo.length === 0 ? (null) : (

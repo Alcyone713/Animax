@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const User = mongoose.model("User")
 const requireLogin = require('../requireLoginMiddleware.js')
+let {PythonShell} = require('python-shell')
 
 
 router.put('/add_to_completedlist', requireLogin, async (req, res) => {
@@ -56,8 +57,21 @@ router.put('/add_to_watchlist', requireLogin, async (req, res) => {
 })
 
 router.get('/recommendations', requireLogin, async (req, res) => {
-    
+    const CompletedList = await User.find({email : req.user.email })
+    let completedArray = [[]];
+    let i=0;
+    CompletedList[0].completedlist.forEach(e => {
+        let mal = e.mal_id;
+        let sc = e.score;
+        let temp = [
+            mal, sc
+        ]
+        completedArray[i] = temp;
+        i++;
+    });
+    res.send(completedArray)
 })
+
 
 module.exports = router
 

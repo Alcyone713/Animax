@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import ListCard from '../../Components/ListCard/ListCard'
 import Navbar from '../../Components/Navbar/Navbar'
 import './CompletedList.scss'
@@ -16,10 +16,10 @@ export default function CompletedListPage() {
     }).then(res => res.json())
       .then(result => {
         console.log(result)
-        if(result.error){
+        if (result.error) {
           navigate("/signin")
         }
-        else{
+        else {
           setCompletedlist(result[0].completedlist)
         }
       })
@@ -33,11 +33,11 @@ export default function CompletedListPage() {
           (<div className='animecard'>
             {completedlist.map((item, index) => {
               return (<div key={index}>
-                <ListCard id={item.mal_id} score={item.score}/>
+                <ListCard id={item.mal_id} score={item.score} />
               </div>)
             })}
-            </div>
-            )
+          </div>
+          )
         }
       </div>
     </div>

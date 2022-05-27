@@ -4,4 +4,7 @@
     background-color: #212121;
     color: gray;
     overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }

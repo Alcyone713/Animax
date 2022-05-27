@@ -11,15 +11,11 @@ import { useNavigate } from 'react-router-dom';
 export default function AnimeCard(props) {
 
     const snackbar = useSnackbar()
-    const history = useNavigate()
+    const navigate = useNavigate()
 
-    const [open1, setOpen1] = useState(false);
-    const onOpenModal1 = () => setOpen1(true);
-    const onCloseModal1 = () => setOpen1(false);
-
-    const [open2, setOpen2] = useState(false);
-    const onOpenModal2 = () => setOpen2(true);
-    const onCloseModal2 = () => setOpen2(false);
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
 
     const bg = {
         modal: {
@@ -27,7 +23,6 @@ export default function AnimeCard(props) {
         },
     };
     const [mal_id, setid] = useState("")
-    const [score, setScore] = useState("")
 
     useEffect(() => {
         setid(props.mal_id)
@@ -48,7 +43,7 @@ export default function AnimeCard(props) {
             .then(result => {
                 console.log(result)
                 if (result.error) {
-                    history("/signin")
+                    navigate("/signin")
                 }
             }).catch(err => {
                 console.log(err)
@@ -64,13 +59,12 @@ export default function AnimeCard(props) {
             },
             body: JSON.stringify({
                 mal_id: mal_id,
-                score: score
             })
         }).then(res => res.json())
             .then(result => {
                 console.log(result)
                 if (result.error) {
-                    history("/signin")
+                    navigate("/signin")
                 }
                 else {
                 }
@@ -91,22 +85,14 @@ export default function AnimeCard(props) {
                 <h6>Rating : {props.score}</h6>
                 <h6>Episodes : {props.episodes}</h6>
                 <h6>End-date : {props.enddate}</h6>
-                <h6 onClick={onOpenModal1} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Read More</h6>
-                <Modal open={open1} onClose={onCloseModal1} center styles={bg} closeIcon={<CloseIcon style={{ color: "white" }} />}>
+                <h6 onClick={onOpenModal} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Read More</h6>
+                <Modal open={open} onClose={onCloseModal} center styles={bg} closeIcon={<CloseIcon style={{ color: "white" }} />}>
                     <AnimeInfo id={props.mal_id} />
                 </Modal>
-
             </div>
             <div className='buttons'>
                 <button onClick={() => add_to_watchlist()} style={{ cursor: "pointer" }}>+ Watchlist </button>
-                <button onClick={onOpenModal2} style={{ cursor: "pointer" }}>+ Completed</button>
-                <Modal open={open2} onClose={onCloseModal2} center styles={bg} closeIcon={<CloseIcon style={{ color: "white" }} />}>
-                    <div style={{ width: "300px", height: "200px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: 'space-evenly' }}>
-                        <h2 style={{color: "#e1e1e1"}}>Enter a score</h2>
-                        <input type="number" min='1' max='10' name='quantity' value={score} onChange={(e) => setScore(e.target.value)} style={{ width: "80%", height: "20px" }}></input>
-                        <button onClick={() => { add_to_completedlist(); onCloseModal2() }} style={{ backgroundColor: "#efb71f", border: "none", borderRadius: "5px", padding: "5px 10px", cursor:"pointer" }}>+ completed list </button>
-                    </div>
-                </Modal>
+                <button onClick={()=> add_to_completedlist()} style={{ cursor: "pointer" }}>+ Completed</button>
             </div>
         </div>
     )

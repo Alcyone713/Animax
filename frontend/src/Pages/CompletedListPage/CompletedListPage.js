@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ListCard from '../../Components/ListCard/ListCard'
 import Navbar from '../../Components/Navbar/Navbar'
+import Footer from '../../Components/Footer/Footer'
 import './CompletedList.scss'
 import { useNavigate } from 'react-router-dom'
 
@@ -27,18 +28,19 @@ export default function CompletedListPage() {
 
   return (
     <div>
-      <Navbar />
       <div className='watchlist'>
-        {completedlist.length === 0 ? (<h1>+ Add something to your  Watchlist</h1>) :
+      <Navbar />
+        {completedlist.length === 0 ? (<h1>+ Add something to your completed list</h1>) :
           (<div className='animecard'>
             {completedlist.map((item, index) => {
               return (<div key={index}>
-                <ListCard id={item.mal_id} score={item.score} />
+                <ListCard id={item.mal_id} />
               </div>)
             })}
           </div>
           )
         }
+        <Footer />
       </div>
     </div>
   )

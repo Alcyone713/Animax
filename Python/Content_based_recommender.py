@@ -25,12 +25,15 @@ anime_features = pd.concat([anime["genre"].str.get_dummies(
 max_abs_scaler = MaxAbsScaler()
 anime_features = max_abs_scaler.fit_transform(anime_features)
 nbrs = NearestNeighbors(
-    n_neighbors=8, algorithm='ball_tree').fit(anime_features)
+    n_neighbors=6, algorithm='ball_tree').fit(anime_features)
 distances, indices = nbrs.kneighbors(anime_features)
 
 
 def get_index(id):
     return anime[anime["uid"] == id].index.tolist()[0]
+
+# def get_index_from_name(title):
+#     return anime[anime["title"]==title].index.tolist()[0]
 
 # print(get_index_from_name("Naruto"))
 # print(distances[144])
@@ -61,7 +64,7 @@ def get_similar_animes(query):
         found_id = 5114
 
     for uid in indices[found_id][2:]:
-        recArr = np.append(recArr, uid)
+        recArr = np.append(recArr, anime.loc[uid]["uid"])
     return recArr
 
 

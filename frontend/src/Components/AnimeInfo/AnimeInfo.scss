@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: row;
     color: #e1e1e1;
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+    }
     .AnimeImg{
         display: flex;
         flex-direction: column;
@@ -13,6 +16,9 @@
             border: none;
             border-radius: 5px;
             font-size: 17px;
+        }
+        @media screen and (max-width: 600px) {
+            width: 95%;
         }
     }
     .animeData::-webkit-scrollbar {

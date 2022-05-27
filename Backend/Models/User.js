@@ -18,16 +18,11 @@ const userSchema = new mongoose.Schema({
             type: Number
         }
     }],
-    completedlist: [
-        {
-            mal_id: {
-                type: Number
-            },
-            score: {
-                type: Number
-            }
-        }
-    ]
+    completedlist: [{
+        mal_id: {
+            type: Number
+        },
+    }]
 })
 
 mongoose.model("User", userSchema);

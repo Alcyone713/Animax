@@ -1,29 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './AnimeInfo.scss'
-import { Modal } from 'react-responsive-modal';
 import { makeRequest } from '../../Actions/Actions';
 import { useSnackbar } from 'material-ui-snackbar-provider'
 import { useNavigate } from 'react-router-dom';
-import CloseIcon from '@mui/icons-material/Close';
+
 
 export default function AnimeInfo(props) {
 
   const id = props.id;
   const [animeinfo, setAnimeInfo] = useState([])
-  const [score, setScore] = useState("")
-
-  const [open, setOpen] = useState(false);
-  const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
 
   const snackbar = useSnackbar()
-  const history = useNavigate()
-
-  const bg = {
-    modal: {
-      background: "#292929"
-    },
-  };
+  const navigate = useNavigate()
 
   const add_to_watchlist = () => {
     fetch('http://localhost:5000/add_to_watchlist', {
@@ -39,12 +27,12 @@ export default function AnimeInfo(props) {
       .then(result => {
         console.log(result)
         if (result.error) {
-          history("/signin")
+          navigate("/signin")
         }
       }).catch(err => {
         console.log(err)
       })
-      snackbar.showMessage('Added to watchlist!')
+    snackbar.showMessage('Added to watchlist!')
   }
   const add_to_completedlist = () => {
     fetch('http://localhost:5000/add_to_completedlist', {
@@ -54,19 +42,18 @@ export default function AnimeInfo(props) {
         "Authorization": "Bearer " + localStorage.getItem("jwt")
       },
       body: JSON.stringify({
-        mal_id: id,
-        score: score
+        mal_id: id
       })
     }).then(res => res.json())
       .then(result => {
         console.log(result)
         if (result.error) {
-          history("/signin")
+          navigate("/signin")
         }
       }).catch(err => {
         console.log(err)
       })
-      snackbar.showMessage('Added to Completed list!')
+    snackbar.showMessage('Added to Completed list!')
   }
   const getAnimeInfo = () => {
     makeRequest('GET', `https://api.jikan.moe/v4/anime/${id}`)
@@ -87,15 +74,8 @@ export default function AnimeInfo(props) {
         <div className='AnimeInfo'>
           <div className='AnimeImg'>
             <img src={animeinfo.data.images.jpg.image_url} alt='animeimg' />
-            <button onClick={() => add_to_watchlist()} style={{cursor: "pointer"}}>+ Watchlist</button>
-            <button onClick={onOpenModal} style={{cursor: "pointer"}}>+ Completed</button>
-            <Modal open={open} onClose={onCloseModal} center styles={bg} closeIcon={<CloseIcon style={{ color: "white" }} />}>
-              <div style={{ width: "300px", height: "200px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: 'space-evenly' }}>
-                <h2 style={{ color: "#e1e1e1" }}>Enter a score</h2>
-                <input type="number" min='1' max='10' name='quantity' value={score} onChange={(e) => setScore(e.target.value)} style={{ width: "80%", height: "20px" }}></input>
-                <button onClick={() => { add_to_completedlist(); onCloseModal() }} style={{ backgroundColor: "#efb71f", border: "none", borderRadius: "5px", padding: "5px 10px", cursor: "pointer" }}>+ completed list </button>
-              </div>
-            </Modal>
+            <button onClick={() => add_to_watchlist()} style={{ cursor: "pointer" }}>+ Watchlist</button>
+            <button onClick={() => add_to_completedlist} style={{ cursor: "pointer" }}>+ Completed</button>
           </div>
           <div className='animeData'>
             <h3 style={{ textAlign: "center", fontSize: '25px' }}>{animeinfo.data.title}</h3>

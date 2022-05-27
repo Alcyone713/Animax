@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,8 +14,6 @@ import Anime8 from '../../Assets/Anime8.jpg'
 
 export default function Carousel() {
 
-  const [topCarousel, setTopCarousel] = useState([])
-  
   const settings = {
     dots:false,
     infinite: true,
@@ -25,27 +23,10 @@ export default function Carousel() {
     autoplaySpeed: 3000,
   };
   
-  const getTopCarousel = async () => {
-    const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/upcoming`)
-      .then(res => res.json())
-
-    setTopCarousel(temp.top.slice(0,5))
-  }
-
-  useEffect(()=>{
-    getTopCarousel()
-  },[])
-
+  //static images, because images fetched from external API were distorting when made bigger
   return (
     <div className='content'>
       <Slider {...settings}>
-       {/* {topCarousel.map((item, index) => {
-         return (
-           <div key={index}>
-             <img src={item.image_url} alt="animeimage" />
-           </div>
-         )
-       })} */}
        <div>
        <img src={Anime1} alt='Anime1'/>
        </div>
@@ -70,7 +51,6 @@ export default function Carousel() {
        <div>
        <img src={Anime8} alt='Anime1'/>
        </div>
-
       </Slider>
     </div>
   )

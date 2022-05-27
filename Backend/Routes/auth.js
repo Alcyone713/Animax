@@ -7,10 +7,7 @@ const jwt = require("jsonwebtoken")
 const { JWT_KEY } = require("../keys.js")
 const requireLogin = require('../requireLoginMiddleware.js')
 
-router.get('/', (req, res) => {
-    res.send('hello')
-})
-
+//this is the signup route, it creates a new user and sends it to the database, it also checks if the username alredy exists
 router.post('/signup', (req, res) => {
     const { name, email, password } = req.body
     if (!email || !name || !password) {
@@ -44,6 +41,7 @@ router.post('/signup', (req, res) => {
         })
 })
 
+//this is the sign in route, it checks if the username and password is same as in the database
 router.post('/signin', (req, res) => {
     const { email, password } = req.body
     if (!email || !password) {
@@ -70,10 +68,5 @@ router.post('/signin', (req, res) => {
                 })
         })
 })
-
-router.get('/logout', (req, res) => {
-    res.clearCookie('nToken');
-    return res.redirect('/');
-});
 
 module.exports = router

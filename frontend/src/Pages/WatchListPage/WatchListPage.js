@@ -3,6 +3,7 @@ import ListCard from '../../Components/ListCard/ListCard'
 import Navbar from '../../Components/Navbar/Navbar'
 import './WatchListPage.scss'
 import { useNavigate } from 'react-router-dom'
+import Footer from '../../Components/Footer/Footer'
 
 export default function WatchListPage() {
 
@@ -28,8 +29,8 @@ export default function WatchListPage() {
 
   return (
     <div>
-      <Navbar />
       <div className='watchlist'>
+      <Navbar />
         {watchlist.length === 0 ? (<h1>+ Add something to your Watchlist</h1>) :
           (<div className='animecard'>
             {watchlist.map((item, index) => {
@@ -40,6 +41,7 @@ export default function WatchListPage() {
           </div>
           )
         }
+        <Footer/>
       </div>
     </div>
   )

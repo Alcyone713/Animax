@@ -4,7 +4,6 @@ const { MONGOURI } = require("./keys.js")
 const cors= require("cors")
 require("./Models/User.js")
 
-
 const app = express();
 app.use(cors())
 const PORT = 5000;
@@ -21,7 +20,6 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
     console.log(err);
 })
-
 
 app.listen(PORT, () => {
     console.log("App is running")

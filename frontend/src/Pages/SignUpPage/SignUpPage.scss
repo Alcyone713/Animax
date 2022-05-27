@@ -10,6 +10,9 @@
     justify-content: flex-end;
     align-items: center;
 
+    @media screen and (max-width: 400px) {
+        justify-content: center;
+    }
     .blur {
         background: rgba(156, 155, 155, 0.062); // Make sure this color has an opacity of less than 1
         backdrop-filter: blur(8px); // This be the blur
@@ -31,6 +34,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        @media screen and (max-width: 400px) {
+            margin-right: 0px;
+        }
         h4{
             margin: 20px;
         }

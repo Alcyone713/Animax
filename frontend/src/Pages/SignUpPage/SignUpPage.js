@@ -44,7 +44,7 @@ export default function SignUpPage() {
                     <h4>Username : </h4>
                     <input type='text' placeholder='Enter your username' value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <h4>Password : </h4>
-                    <input type='text' placeholder='Enter your password' value={password} onChange={(e) => setPasword(e.target.value)}></input>
+                    <input type='password' placeholder='Enter your password' value={password} onChange={(e) => setPasword(e.target.value)}></input>
                     <button onClick={PostData} type="button">Sign Up</button>
                     <Link to='/signin'>Already a member? Sign In</Link>
                 </form>

@@ -1,3 +1,7 @@
+
+/* this function is used to make an API call again after a certain amount of time in case an error occurs,
+   it is mostly used to handle error 429(too many requests) and prevents our page from disappearing
+   when an error occurs */
 export const makeRequest = (method, url, data) => {
     return new Promise(function (resolve, reject) {
         var counter = 0;

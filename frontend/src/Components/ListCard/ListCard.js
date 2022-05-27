@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react'
+import Modal from 'react-responsive-modal';
 import { makeRequest } from '../../Actions/Actions';
+import AnimeInfo from '../AnimeInfo/AnimeInfo';
 import './ListCard.scss'
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function ListCard(props) {
 
     const id = props.id
     const [animeinfo, setAnimeInfo] = useState([])
+
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
+ 
+    const bg = {
+        modal: {
+            background: "#292929"
+        },
+    };
 
     const getAnimeInfo = () => {
         makeRequest('GET', `https://api.jikan.moe/v4/anime/${id}`)
@@ -35,9 +48,11 @@ export default function ListCard(props) {
                     <div className='animeInfo'>
                         <h6>Rating : {animeinfo.data.score}</h6>
                         <h6>Episodes : {animeinfo.data.episodes}</h6>
-                        {props.score===null ? (null) : (
-                            <h6>score : {props.score}</h6>
-                        )}
+                        <h6 onClick={onOpenModal} style={{textDecoration: "underline", cursor: "pointer"}}>Read More</h6>
+                        <Modal open={open} onClose={onCloseModal} center styles={bg} closeIcon={<CloseIcon style={{ color: "white" }} />}>
+                            <AnimeInfo id={props.id} />
+                        </Modal>
+                        <br/>
                     </div>
                 </div>
             )

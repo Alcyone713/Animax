@@ -51,6 +51,7 @@ export default function Navbar() {
     localStorage.removeItem("jwt")
     history('/')
     window.location.reload(false)
+    sessionStorage.removeItem("recommendArray")
   }
 
   return (
@@ -78,9 +79,9 @@ export default function Navbar() {
           </div>
           <div className='logout'>
             {name === "" ? (null) : (
-              <div style={{display: "flex", flexDirection: "row"}}>
+              <div style={{ display: "flex", flexDirection: "row" }}>
                 <h2>Hi! {name}</h2>
-                <LogoutIcon style={{ fontSize: '30px', cursor: "pointer" }} onClick={() => logout()} />
+                <LogoutIcon style={{ fontSize: '30px', cursor: "pointer"}} onClick={() => logout()} />
               </div>
             )}
 

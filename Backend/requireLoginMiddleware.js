@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken')
 const { JWT_KEY } = require('./keys.js')
 const mongoose = require('mongoose')
 const User = mongoose.model("User")
+
+//middlewares are functions that get executed before the required function
+//this middleware is checking if the user is logged in before accessing a protected resourse, like watchlists
 module.exports = (req, res, next) => {
     const { authorization } = req.headers
     if (!authorization) {

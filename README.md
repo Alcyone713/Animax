@@ -8,6 +8,18 @@ recommendations based on the animes you have in your completed list!
 
 ![logo](frontend/src/Assets/logo.png)
 
+## Overview 
+
+* [Build and Run Locally](#build-and-run-locally)
+* [Environment Variables](#environment-variables)
+* [Demo](#demo)
+* [Weekwise division of work](#weekwise-division-of-the-work)
+* [About the Source Code](#about-the-source-code)
+* [Recommendation Systems](#recommendation-systems)
+* [Why I decided to use content based filtering?](#why-i-decided-to-use-content-based-filtering?)
+* [K Nearest Neighbours Algorithm](#k-nearest-neighbour-algorithms)
+* [Motivation](#motivation)
+* [Additional Information](#additional-information)
 
 ## Build and Run Locally
 

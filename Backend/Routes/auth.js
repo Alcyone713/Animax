@@ -4,8 +4,8 @@ const mongoose = require("mongoose")
 const User = mongoose.model("User")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const { JWT_KEY } = require("../keys.js")
 const requireLogin = require('../requireLoginMiddleware.js')
+require('dotenv').config()
 
 //this is the signup route, it creates a new user and sends it to the database, it also checks if the username alredy exists
 router.post('/signup', (req, res) => {
@@ -56,7 +56,7 @@ router.post('/signin', (req, res) => {
             bcrypt.compare(password, savedUser.password)
                 .then(doMatch => {
                     if (doMatch) {
-                        const token = jwt.sign({ _id: savedUser._id }, JWT_KEY)
+                        const token = jwt.sign({ _id: savedUser._id }, process.env.JWT_KEY)
                         const { _id, name, email } = savedUser
                         res.json({ token, user: { _id, name, email } })
                     }

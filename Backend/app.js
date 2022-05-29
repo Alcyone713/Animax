@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose")
-const { MONGOURI } = require("./keys.js")
 const cors= require("cors")
 require("./Models/User.js")
+
+require('dotenv').config()
 
 const app = express();
 app.use(cors())
@@ -13,7 +14,7 @@ app.use(express.json());
 app.use(require('./Routes/auth.js'))
 app.use(require('./Routes/lists.js'))
 
-mongoose.connect(MONGOURI);
+mongoose.connect(process.env.MONGOURI);
 mongoose.connection.on('connected', () => {
     console.log("Connected to MongoDB");
 })

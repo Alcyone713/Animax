@@ -25,7 +25,7 @@ Go to the project directory
 Install dependencies
 
 ```bash
-//run the commands in the given order to install all the dependencies
+##run the commands in the given order to install all the dependencies
   cd frontend
   yarn install
   cd ..
@@ -39,7 +39,7 @@ Install dependencies
 Start the server
 
 ```bash
-//run the following commands right after the above commands to run the app
+##run the following commands right after the above commands to run the app
   cd ..
   cd frontend
   yarn start

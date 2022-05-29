@@ -82,7 +82,7 @@ To run this project, you will need to add the following environment variables to
 
 ## Demo
 
-![Demo Video](https://youtu.be/E6OUDsdGWnQ)
+[Demo Video](https://youtu.be/E6OUDsdGWnQ)
 
 
 ## Weekwise division of the work

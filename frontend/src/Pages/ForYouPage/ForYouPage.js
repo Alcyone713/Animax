@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ListCard from '../../Components/ListCard/ListCard'
 import Navbar from '../../Components/Navbar/Navbar'
 import './ForYouPage.scss'
@@ -9,6 +9,9 @@ export default function ForYouPage() {
 
   const navigate = useNavigate()
   let recommendations = []
+
+  //If you don't see the recommendations after two minutes, check the console, if there is a list of numbers in the 
+  //console, you can refresh the page.
   useEffect(() => {
     fetch('http://localhost:5000/recommendations', {
       headers: {
@@ -22,7 +25,7 @@ export default function ForYouPage() {
           navigate("/signin")
         }
         else {
-          recommendations.setItem("recommendArray", JSON.stringify(result))
+          sessionStorage.setItem("recommendArray", JSON.stringify(result))
         }
       })
   }, [])
@@ -40,7 +43,7 @@ export default function ForYouPage() {
           })
           )
         }
-        <Footer/>
+        {recommendations === null ? (null) : (<Footer/>)}
       </div>
     </div>
   )

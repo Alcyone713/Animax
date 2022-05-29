@@ -11,7 +11,6 @@ export default function TopAnimes() {
       .then(res => res.json())
 
     setTopAnime(temp.top.slice(0,30))
-    // console.log(temp)
   }
 
   useEffect(() => {

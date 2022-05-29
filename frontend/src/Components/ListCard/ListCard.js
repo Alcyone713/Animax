@@ -24,7 +24,6 @@ export default function ListCard(props) {
         makeRequest('GET', `https://api.jikan.moe/v4/anime/${id}`)
             .then(info => {
                 setAnimeInfo(JSON.parse(info))
-                console.log(JSON.parse(info))
             })
             .catch(err => {
                 console.log(err)

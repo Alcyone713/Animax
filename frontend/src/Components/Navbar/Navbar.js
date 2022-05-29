@@ -21,7 +21,6 @@ export default function Navbar() {
     makeRequest('GET', "https://api.jikan.moe/v4/anime?q=" + search + "&limit=10")
       .then(info => {
         setSearchResults(JSON.parse(info).data)
-        // console.log(JSON.parse(info));
       })
       .catch(err => {
         console.log(err)
@@ -42,7 +41,6 @@ export default function Navbar() {
       }
     }).then(res => res.json())
       .then(result => {
-        console.log(result)
         setName(result[0].name)
       })
   }, [])

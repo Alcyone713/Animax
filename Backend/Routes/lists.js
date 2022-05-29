@@ -68,6 +68,9 @@ router.get('/recommendations', requireLogin, async (req, res) => {
         completedArray[i] = mal;
         i++;
     });
+    if(completedArray.length===0){
+        return
+    }
     /*the input that goes to the python script will only consider the last 10 elements of the completed list, this is done to
     increase the speed of the algorithm */
     if (completedArray.length > 10) {

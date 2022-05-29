@@ -40,7 +40,7 @@ export default function CompletedListPage() {
           </div>
           )
         }
-        <Footer />
+        {completedlist.length < 4 ? (null) : (<Footer/>)}
       </div>
     </div>
   )

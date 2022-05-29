@@ -41,7 +41,7 @@ export default function WatchListPage() {
           </div>
           )
         }
-        <Footer/>
+        {watchlist.length < 4 ? (null) : (<Footer/>)}
       </div>
     </div>
   )

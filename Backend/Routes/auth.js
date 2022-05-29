@@ -18,6 +18,7 @@ router.post('/signup', (req, res) => {
     User.findOne({ email: email })
         .then((savedUser) => {
             if (savedUser) {
+                alert("Username is taken")
                 return res.status(422).json({ error: "user already exists" })
             }
             bcrypt.hash(password, 12)

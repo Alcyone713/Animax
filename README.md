@@ -61,6 +61,11 @@ To run this project, you will need to add the following environment variables to
 
 
 
+## Demo
+
+Insert gif or link to demo
+
+
 ## Motivation
 We all love anime, some of our favorite stories, characters and worlds come from anime. However, there is a problem with the current state of the medium.
 
@@ -121,3 +126,32 @@ Time complexity: O(Dlog(N))
 
 
 **I used ball-tree algorithm in my code**
+## About the Source code
+### Tech Stacks used:
+**Recommendation System** : Python3
+
+**Frontend** : ReactJS
+
+**Server** : NodeJS, ExpressJS
+
+**Database** : MongoDB Atlas
+
+### Other Resources used: 
+**Dataset** : [Kaggle](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews)
+
+**External API** : [Jikan API](https://jikan.moe/)
+
+**REST API Testing** : Postman
+
+**NPM Package to connent Python to NodeJS** : Python-Shell
+
+### Challenges I faced
+* One of the biggest challenge I faced is that the external API I am using to get information about animes only allows 3 requests/second and 60 requests/min. This was a particular problem in making the searchbar because nobody types 1 letter per second. To overcome this, I made a recursive function to call the API again in case an error occurs.
+* Second issue is that the dataset I am using was last updated in 2020 (it was the latest relevent one I could find), so if someone inputs an anime that was released after 2020, the whole algorithm crashes. To overcome this, I added a try catch block where on occurance of IndexError, I am manually setting the input to a data that I am sure is in the list. This might give some false results but it prevents the algorithm from crashing.
+* To connect python to NodeJS, I used python-shell npm package. I sent the input array to the python script as a JSON, and since there is no JSON.parse() in python, I had to convert my JSON input to an integer array manually by removing the openeing and closing brackets, spliting the array using ',' and turning each string to number.
+
+***More information can be found in the comments***
+
+
+
+

@@ -23,6 +23,12 @@ recommendations based on the animes you have in your completed list!
 
 ## Build and Run Locally
 
+Prerequisites
+* NodeJS
+* NPM
+* yarn
+* Python3
+
 Clone the project
 
 ```bash

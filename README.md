@@ -16,8 +16,8 @@ recommendations based on the animes you have in your completed list!
 * [Weekwise division of work](#weekwise-division-of-the-work)
 * [About the Source Code](#about-the-source-code)
 * [Recommendation Systems](#recommendation-systems)
-* [Why I decided to use content based filtering?](#why-i-decided-to-use-content-based-filtering?)
-* [K Nearest Neighbours Algorithm](#k-nearest-neighbour-algorithms)
+* [Why I decided to use content based filtering?](#why-i-decided-to-use-content-based-filtering)
+* [K Nearest Neighbours Algorithm](#k-nearest-neighbour-knn-algorithm)
 * [Motivation](#motivation)
 * [Additional Information](#additional-information)
 

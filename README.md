@@ -5,7 +5,7 @@ This is an Anime recommendation application where you can
 create your profile, read about any animes, add them to your completed list or watchlist, and the best part....it gives you
 recommendations based on the animes you have in your completed list!
 
-
+![App Screenshot](Animax/frontend/src/Assets/logo.png)
 
 
 ## Build and deploy locally

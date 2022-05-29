@@ -5,10 +5,11 @@ This is an Anime recommendation application where you can
 create your profile, read about any animes, add them to your completed list or watchlist, and the best part....it gives you
 recommendations based on the animes you have in your completed list!
 
+
 ![logo](frontend/src/Assets/logo.png)
 
 
-## Build and deploy locally
+## Build and Run Locally
 
 Clone the project
 
@@ -51,7 +52,7 @@ Start the server
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to a .env file in the backend folder.
+To run this project, you will need to add the following environment variables to keys.js file in the backend folder.
 
 `MONGO_URI` : Genrate a MongoDB URI from MongoDB Atlas or your local MongoDB compass
 
@@ -66,12 +67,59 @@ To run this project, you will need to add the following environment variables to
 Insert gif or link to demo
 
 
-## Motivation
-We all love anime, some of our favorite stories, characters and worlds come from anime. However, there is a problem with the current state of the medium.
+## Weekwise division of the work
+**Week 1** : Research about different types of recommendation system. And learning Python.
 
-There is so much new anime coming out each season that whatever is the most popular at the moment completely dominates the conversation in the community and as a result a lot of older and incredible, anime is forgotten, even if they came out just a couple of months ago.
+**Week 2**: Deciding the problem statement and finalizing the algorithm and writing it in Python.
 
-This system uses algorithms, to give people qualitative recommendations based on shows they previously watched, without putting much weight into how recent the recommended shows are. This way people get good recommendations and there is also a better chance for older anime to shine.
+**Week 3**: Designing and building the frontend of the app.
+
+**Week 4**: Building the REST API and combining all the aspects.
+## About the Source code
+### Tech Stacks used:
+**Recommendation System** : Python3
+
+**Frontend** : ReactJS
+
+**Server** : NodeJS, ExpressJS
+
+**Database** : MongoDB Atlas
+
+### Other Resources used: 
+**Dataset** : [Kaggle](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews)
+
+**External API** : [Jikan API](https://jikan.moe/)
+
+**REST API Testing** : Postman
+
+**NPM Package to connent Python to NodeJS** : Python-Shell
+
+### Folder structure: 
+The whole source code is divided into 3 parts, **Frontend**, **Backend** and **Python-scripts**:
+
+* **Frontend** has ReactJS scripts inside the **src** folder, broadly divided into **Components**, **Pages** and **Assets**.
+        
+    * **Pages** contains all the different pages.
+    * **Components** has all the components which are assembled in the pages.
+    * **Assets** has images used in the carousel.
+
+* **Backend** has NodeJS scripts broadly divided into **Routes** and **Models**.
+    * **Routes** has different RESTful API for functions like signing in, adding things to list.
+    * **Models** has the MongoDB User Schema.
+
+* **Python** has the algorithm, the dataset and the requirements.txt file.
+
+### Challenges I faced: 
+* One of the biggest challenge I faced is that the external API I am using to get information about animes only allows 3 requests/second and 60 requests/min. This was a particular problem in making the searchbar because nobody types 1 letter per second. To overcome this, I made a recursive function to call the API again in case an error occurs.
+* Second issue is that the dataset I am using was last updated in 2020 (it was the latest relevent one I could find), so if someone inputs an anime that was released after 2020, the whole algorithm crashes. To overcome this, I added a try catch block where on occurance of IndexError, I am manually setting the input to a data that I am sure is in the list. This might give some false results but it prevents the algorithm from crashing.
+* To connect python to NodeJS, I used python-shell npm package. I sent the input array to the python script as a JSON, and since there is no JSON.parse() in python, I had to convert my JSON input to an integer array manually by removing the openeing and closing brackets, spliting the array using ',' and turning each string to number.
+
+***More information can be found in the comments***
+
+
+
+
+
 ## Recommendation systems
 A recommendation engine is a type of data filtering tool using machine learning algorithms to recommend the most relevant items to a particular user or customer. It operates on the principle of finding patterns in consumer behavior data, which can be collected implicitly or explicitly.
 
@@ -126,32 +174,15 @@ Time complexity: O(Dlog(N))
 
 
 **I used ball-tree algorithm in my code**
-## About the Source code
-### Tech Stacks used:
-**Recommendation System** : Python3
+## Motivation
+We all love anime, some of our favorite stories, characters and worlds come from anime. However, there is a problem with the current state of the medium.
 
-**Frontend** : ReactJS
+There is so much new anime coming out each season that whatever is the most popular at the moment completely dominates the conversation in the community and as a result a lot of older and incredible, anime is forgotten, even if they came out just a couple of months ago.
 
-**Server** : NodeJS, ExpressJS
+This system uses algorithms, to give people qualitative recommendations based on shows they previously watched, without putting much weight into how recent the recommended shows are. This way people get good recommendations and there is also a better chance for older anime to shine.
+## Additional Information
 
-**Database** : MongoDB Atlas
-
-### Other Resources used: 
-**Dataset** : [Kaggle](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews)
-
-**External API** : [Jikan API](https://jikan.moe/)
-
-**REST API Testing** : Postman
-
-**NPM Package to connent Python to NodeJS** : Python-Shell
-
-### Challenges I faced
-* One of the biggest challenge I faced is that the external API I am using to get information about animes only allows 3 requests/second and 60 requests/min. This was a particular problem in making the searchbar because nobody types 1 letter per second. To overcome this, I made a recursive function to call the API again in case an error occurs.
-* Second issue is that the dataset I am using was last updated in 2020 (it was the latest relevent one I could find), so if someone inputs an anime that was released after 2020, the whole algorithm crashes. To overcome this, I added a try catch block where on occurance of IndexError, I am manually setting the input to a data that I am sure is in the list. This might give some false results but it prevents the algorithm from crashing.
-* To connect python to NodeJS, I used python-shell npm package. I sent the input array to the python script as a JSON, and since there is no JSON.parse() in python, I had to convert my JSON input to an integer array manually by removing the openeing and closing brackets, spliting the array using ',' and turning each string to number.
-
-***More information can be found in the comments***
-
-
-
-
+The recommendation system goes through your entire completed list and creates a similarity 
+martix comparing it to 16000+ animes. Hence it takes about 2 minutes (generally less) to give the recommendations, 
+if you don't see the recommendations after 2 minutes, check the console. If there's an array of numbers, you can safely refresh the page 
+to see the recommendations, but if you refresh before that, the whole process will start again.

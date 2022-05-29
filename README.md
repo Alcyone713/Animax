@@ -51,7 +51,7 @@ Start the server
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to keys.js file in the backend folder.
+To run this project, you will need to add the following environment variables to a .env file in the backend folder.
 
 `MONGO_URI` : Genrate a MongoDB URI from MongoDB Atlas or your local MongoDB compass
 

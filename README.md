@@ -17,7 +17,7 @@ recommendations based on the animes you have in your completed list!
 * [About the Source Code](#about-the-source-code)
 * [Recommendation Systems](#recommendation-systems)
 * [Why I decided to use content based filtering?](#why-i-decided-to-use-content-based-filtering)
-* [K Nearest Neighbours Algorithm](#k-nearest-neighbour-knn-algorithm)
+* [K Nearest Neighbours Algorithm](#k-nearest-neighbours-knn-algorithm)
 * [Motivation](#motivation)
 * [Additional Information](#additional-information)
 
